@@ -32,9 +32,6 @@ public class Fecha {
     @Override
     public String toString() {
         // Implementar
-        // String mess =  this.mes; 
-        // String diaa = (String) Fecha.dia;
-
         return this.dia()+"/"+this.mes() ;
     }
 

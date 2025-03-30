@@ -46,20 +46,19 @@ class ArregloRedimensionableDeRecordatorios {
 
     public ArregloRedimensionableDeRecordatorios(ArregloRedimensionableDeRecordatorios vector) {  //constructor
         // Implementar
-        (ArregloRedimensionableDeRecordatorios) this.recordatorios = new Recordatorio[0];
- 
-
-     
+        this.recordatorios = new Recordatorio[vector.longitud()];
+        for (int j = 0; j < vector.longitud(); j++) {
+            this.recordatorios[j] = vector.obtener(j);
+        }    
     }
 
     public ArregloRedimensionableDeRecordatorios copiar() {
         // Implementar
-        // Recordatorio[]otroRecordatorios = new Recordatorio[this.longitud()];
-        // for (int j = 0; j < this.longitud()-1; j++) {
-        //     otroRecordatorios[j] = this.recordatorios[j] ;
-        // }
-        // vector = otroRecordatorios ;
-        // return vector ;
-        return null;
+        ArregloRedimensionableDeRecordatorios copiaArreglo = new ArregloRedimensionableDeRecordatorios();
+        for (int j = 0; j < this.longitud(); j++) {
+            copiaArreglo.agregarAtras(this.recordatorios[j]);
+        }
+        return copiaArreglo;
     }
+
 }

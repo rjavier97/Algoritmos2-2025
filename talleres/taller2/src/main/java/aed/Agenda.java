@@ -19,14 +19,14 @@ public class Agenda {
     @Override
     public String toString() {
         // Implementar
-        String fechaActual = (this.fechaActual()+"\n").concat("=====");
+        String fechaActual = (this.fechaActual()+"\n").concat("=====\n");
         String recordatoriosActuales = "";
         for (int i = 0; i < this.recordatorios.longitud(); i++) {
             if (this.fecha.equals(this.recordatorios.obtener(i).fecha()) )
-            recordatoriosActuales = recordatoriosActuales.concat("\n"+this.recordatorios.obtener(i).toString());
+            recordatoriosActuales = recordatoriosActuales.concat(this.recordatorios.obtener(i).toString()+"\n");
             }
         
-        return fechaActual+recordatoriosActuales+"\n";
+        return fechaActual+recordatoriosActuales;
     }
 
     public void incrementarDia() {
@@ -40,17 +40,3 @@ public class Agenda {
     }
 
 }
-
-
-// @Override
-// public String toString() {
-//     String fechaActual = (this.fechaActual()+"\n").concat("=====\n");
-//     String recordatoriosActuales = "";
-//     for (int i = 0; i < this.recordatorios.longitud(); i++ ) {
-//         if (i == this.recordatorios.longitud()-1 ){
-//             recordatoriosActuales = recordatoriosActuales.concat(this.recordatorios.obtener(i).toString());
-//         } else if (i != this.recordatorios.longitud()-1) {
-//             recordatoriosActuales = recordatoriosActuales.concat(this.recordatorios.obtener(i).toString()).concat("\n");
-//         }
-//     }
-//     return fechaActual+recordatoriosActuales+"\n";

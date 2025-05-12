@@ -10,7 +10,7 @@ public class ListaEnlazada<T> implements Secuencia<T> {
     private class Nodo {
         // Completar
         private T valor ;
-        private Nodo anterior ;
+        private Nodo anterior;
         private Nodo siguiente ;
 
         Nodo(T v) { 
@@ -126,41 +126,42 @@ public class ListaEnlazada<T> implements Secuencia<T> {
             }
         }
         return "["+lista+"]";
-
     }
 
     private class ListaIterador implements Iterador<T> {
     	// Completar atributos privados
-        // int dedito ;
+        private int dedito ;
 
-        // Iterador(){
-        //     dedito = 0;
-        // }
+        ListaIterador() {
+            dedito = 0;
+        }
 
         public boolean haySiguiente() {
-	        throw new UnsupportedOperationException("No implementada aun");
-            // return dedito != longitud ;
+            return dedito != longitud ;
+            // return nodo.siguiente != null ;
         }
         
         public boolean hayAnterior() {
-	        throw new UnsupportedOperationException("No implementada aun");
+            return dedito != 0 ;
         }
 
         public T siguiente() {
-	        throw new UnsupportedOperationException("No implementada aun");
-            // int i = dedito;
-            // dedito = dedito + 1;
-            // return 
+            int i = dedito;
+            dedito = dedito + 1;
+            return obtener(i) ;
         }
         
 
         public T anterior() {
-	        throw new UnsupportedOperationException("No implementada aun");
+            // int i = dedito;      
+            dedito = dedito - 1;
+            return obtener(dedito) ;
         }
     }
 
     public Iterador<T> iterador() {
-	    throw new UnsupportedOperationException("No implementada aun");
+        return new ListaIterador() ;
+    
+        }
     }
 
-}

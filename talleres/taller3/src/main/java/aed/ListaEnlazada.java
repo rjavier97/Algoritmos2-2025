@@ -117,7 +117,16 @@ public class ListaEnlazada<T> implements Secuencia<T> {
     
     @Override
     public String toString() {
-        throw new UnsupportedOperationException("No implementada aun");
+        String lista = "";
+        for (int i=0 ; i< this.longitud() ; i++){
+            if (i == this.longitud()-1){
+                lista = lista.concat(this.obtener(i).toString());
+            } else {
+            lista = lista.concat(this.obtener(i).toString()+", ") ;
+            }
+        }
+        return "["+lista+"]";
+
     }
 
     private class ListaIterador implements Iterador<T> {

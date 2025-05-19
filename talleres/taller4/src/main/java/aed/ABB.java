@@ -49,23 +49,45 @@ public class ABB<T extends Comparable<T>> implements Conjunto<T> {
         // if (elem.compareTo(raiz.valor)>0) {  //caso en el que elem es mayor que el valor de la raiz
         //     nuevo.padre = raiz;
         // }
-        if (cardinal == 0){
+        if (this.raiz == null){
             raiz = nuevo;
             nuevo.padre = raiz;
             cardinal +=1;
+        } else {
+            if (elem.compareTo(raiz.valor)<0){
+                raiz.izq = nuevo ;
+                nuevo.padre = raiz ;
+                cardinal +=1;
+                altura +=1 ;
+            }
+            if (elem.compareTo(raiz.valor)>0){
+                raiz.der = nuevo;
+                nuevo.padre = raiz;
+                cardinal +=1;
+                altura +=1 ;
+            }
+
         }
     }
 
     public boolean pertenece(T elem){
         boolean res = false ;
-        if (this.raiz == null) {
-        }
-        if (this.raiz.valor == elem){
+        if (raiz == null){   
+        } else {
+            if (raiz != null && elem.compareTo(raiz.valor) == 0){
             res = true;
+            }
+            if (raiz != null && elem.compareTo(raiz.valor)<0){
+            raiz = raiz.izq;
+            return pertenece(raiz.valor);
+            }
+            if (raiz != null && elem.compareTo(raiz.valor)>0){
+            raiz = raiz.der;
+            return pertenece(raiz.valor);
+            }                
         }
-        if ()
-        return res ;   
-    }
+        return res;
+    }       
 
     public void eliminar(T elem){
         throw new UnsupportedOperationException("No implementada aun");

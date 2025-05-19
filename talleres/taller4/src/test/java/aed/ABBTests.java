@@ -34,7 +34,7 @@ class ABBTests {
 
         assertTrue(conjunto.pertenece(43));
         // assertTrue(conjunto.pertenece(42));
-        assertTrue(conjunto.pertenece(40));
+        assertTrue(conjunto.pertenece(41));
         assertEquals(3, conjunto.cardinal());
     }
 

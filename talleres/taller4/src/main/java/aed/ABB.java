@@ -32,6 +32,12 @@ public class ABB<T extends Comparable<T>> implements Conjunto<T> {
         altura = 0;
     }
 
+    public ABB(Nodo nodo){
+        raiz = nodo ;
+        cardinal = this.cardinal;
+        altura = this.altura;
+    }
+
     public int cardinal() {
         return cardinal;
     }
@@ -54,7 +60,7 @@ public class ABB<T extends Comparable<T>> implements Conjunto<T> {
             nuevo.padre = raiz;
             cardinal +=1;
         } else {
-            if (elem.compareTo(raiz.valor)<0){
+            if (this.raiz != null && elem.compareTo(raiz.valor)<0){
                 raiz.izq = nuevo ;
                 nuevo.padre = raiz ;
                 cardinal +=1;
@@ -78,12 +84,16 @@ public class ABB<T extends Comparable<T>> implements Conjunto<T> {
             res = true;
             }
             if (raiz != null && elem.compareTo(raiz.valor)<0){
-            raiz = raiz.izq;
-            return pertenece(raiz.valor);
+                // raiz = raiz.izq;
+            // return pertenece(raiz.valor);
+                ABB arbol = new ABB(raiz.izq);
+                return arbol.pertenece(elem);
             }
             if (raiz != null && elem.compareTo(raiz.valor)>0){
-            raiz = raiz.der;
-            return pertenece(raiz.valor);
+            // raiz = raiz.der;
+            // return pertenece(raiz.valor);
+                ABB arbol = new ABB(raiz.der);
+                return arbol.pertenece(elem);
             }                
         }
         return res;

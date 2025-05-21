@@ -29,11 +29,11 @@ class ABBTests {
         ABB<Integer> conjunto = new ABB<Integer>();
 
         conjunto.insertar(43);
-        // conjunto.insertar(42);
+        conjunto.insertar(42);
         conjunto.insertar(41);
 
         assertTrue(conjunto.pertenece(43));
-        // assertTrue(conjunto.pertenece(42));
+        assertTrue(conjunto.pertenece(42));
         assertTrue(conjunto.pertenece(41));
         assertEquals(3, conjunto.cardinal());
     }

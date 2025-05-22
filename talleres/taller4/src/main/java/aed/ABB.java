@@ -107,14 +107,6 @@ public class ABB<T extends Comparable<T>> implements Conjunto<T> {
     public boolean pertenece(T elem){
         Nodo ultimo_nodo_buscado = buscar_nodo(elem, raiz);
         return raiz != null && elem.compareTo(ultimo_nodo_buscado.valor)==0 ;
-        // boolean res = false;
-        // if (raiz == null){   
-        // } else {
-        //     if (elem.compareTo(ultimo_nodo_buscado.valor)==0 ){
-        //         res = true;
-        //     }             
-        // }
-        //return res ;
     }       
 
     public void eliminar(T elem){
@@ -163,7 +155,7 @@ public class ABB<T extends Comparable<T>> implements Conjunto<T> {
                 if (sucesor.izq==null && sucesor.der==null){ // si el sucesor no tiene hijos
                     ultimo_nodo_buscado = sucesor ;
                     ultimo_nodo_buscado.padre.der = ultimo_nodo_buscado ;
-                    ultimo_nodo_buscado.der.padre = ultimo_nodo_buscado;
+                    ultimo_nodo_buscado.izq.padre = ultimo_nodo_buscado.padre.der;
                     cardinal --;
                 }
             }

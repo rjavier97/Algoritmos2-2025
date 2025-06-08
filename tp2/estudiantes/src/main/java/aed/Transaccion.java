@@ -1,5 +1,7 @@
 package aed;
 
+import java.util.ArrayList;
+
 public class Transaccion implements Comparable<Transaccion> {
     private int id;
     private int id_comprador;
@@ -14,13 +16,29 @@ public class Transaccion implements Comparable<Transaccion> {
     }
 
     @Override
-    public int compareTo(Transaccion otro) {
-        throw new UnsupportedOperationException("Implementar!");
+    public int compareTo(Transaccion otro) {    
+        if(otro == null){
+            String mensajeDeError = "No puede compararse con null";
+            throw new IllegalArgumentException(mensajeDeError);
+        }
+            
+        return this.monto - otro.monto;
     }
 
     @Override
     public boolean equals(Object otro){
-        throw new UnsupportedOperationException("Implementar!");
+        boolean otroEsNull = (otro == null);
+        boolean claseDistinta = otro.getClass() != this.getClass();
+
+        if (otroEsNull || claseDistinta){
+            return false;
+        }
+
+        Transaccion otraTransaccion = (Transaccion) otro ;
+
+        return (id == otraTransaccion.id && id_comprador == otraTransaccion.id_comprador 
+        && id_vendedor == otraTransaccion.id_vendedor && monto == otraTransaccion.monto);
+
     }
 
     public int monto() {

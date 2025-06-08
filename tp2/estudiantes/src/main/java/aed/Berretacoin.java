@@ -1,5 +1,7 @@
 package aed;
 
+import aed.Clases.*;
+
 import java.lang.reflect.Array;
 
 public class Berretacoin {

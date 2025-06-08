@@ -1,4 +1,8 @@
-package aed;
+package aed.Clases;
+
+import java.util.ArrayList;
+
+import aed.Transaccion;
 
 public class Bloque{
     private Transaccion[] ultimoBloqueOrdenado;

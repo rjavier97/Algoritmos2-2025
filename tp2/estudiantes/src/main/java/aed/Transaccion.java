@@ -1,5 +1,7 @@
 package aed;
 
+import aed.Clases.*;
+
 import java.util.ArrayList;
 
 public class Transaccion implements Comparable<Transaccion> {
@@ -21,8 +23,23 @@ public class Transaccion implements Comparable<Transaccion> {
             String mensajeDeError = "No puede compararse con null";
             throw new IllegalArgumentException(mensajeDeError);
         }
-            
-        return this.monto - otro.monto;
+
+        int res = 0 ;
+
+        if (this.monto - otro.monto >0){
+            res = 1;
+        } 
+        if (this.monto - otro.monto <0){
+            res = -1 ;
+        } 
+        if (this.monto - otro.monto == 0){
+            if (this.id > otro.id){
+                res = 1;
+            } else {
+                res = -1;
+            }
+        }
+        return res ;
     }
 
     @Override

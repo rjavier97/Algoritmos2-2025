@@ -24,13 +24,10 @@ public class MaxHeapTransacciones {
         }
     }
 
-    public boolean estaVacio() {
-        return tamaño == 0;
-    }
-
     public Transaccion desencolar() {
-        if (estaVacio()) 
+        if (tamaño==0){ 
         return null;
+        }
         Transaccion max = heap[0];
         heap[0] = heap[--tamaño];
         bajar(0);
@@ -63,5 +60,9 @@ public class MaxHeapTransacciones {
             copiaTransacciones[i] = transaccionesOriginal[i] ;
         }
         return copiaTransacciones;
+    }
+
+    public int tamaño(){
+        return tamaño;
     }
 }

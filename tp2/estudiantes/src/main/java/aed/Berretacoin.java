@@ -14,7 +14,7 @@ public class Berretacoin {
     public void agregarBloque(Transaccion[] transacciones) {
         bloqueActual = new MaxHeapTransacciones(transacciones); // nuevo bloque reemplaza el anterior
 
-        while (!bloqueActual.estaVacio()) {
+        while (bloqueActual.tamaño() != 0) {
             Transaccion t = bloqueActual.desencolar();
             int comprador = t.id_comprador();
             int vendedor = t.id_vendedor();

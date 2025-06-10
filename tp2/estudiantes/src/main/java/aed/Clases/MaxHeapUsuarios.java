@@ -52,9 +52,12 @@ public class MaxHeapUsuarios {
         while (true) {
             int izq = 2 * i + 1, der = 2 * i + 2, mayor = i;
 
-            if (izq < tamaño && heap[izq].compareTo(heap[mayor])==1) mayor = izq;
-            if (der < tamaño && heap[der].compareTo(heap[mayor])==1) mayor = der;
-
+            if (izq < tamaño && heap[izq].compareTo(heap[mayor])==1) {
+                mayor = izq;
+            }    
+            if (der < tamaño && heap[der].compareTo(heap[mayor])==1) {
+                mayor = der;
+            }
             if (mayor != i) {
                 swap(i, mayor);
                 i = mayor;
@@ -127,22 +130,3 @@ public class MaxHeapUsuarios {
 //     } 
 
 // }
-
-
-
-
-//     // private class Nodo {
-//     //     T valor ;
-//     //     Nodo izq ;
-//     //     Nodo der ;
-//     //     Nodo padre ;
-//     //     int posicion ;
-
-//     //     Nodo (T v) {
-//     //         valor = v ;
-//     //         izq = null ;
-//     //         der = null ;
-//     //         padre = null ;
-//     //         posicion = 0 ;
-//     //     }
-//     // }

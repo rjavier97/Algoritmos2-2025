@@ -8,14 +8,14 @@ public class Berretacoin {
 
     public Berretacoin(int cantidadUsuarios) {
         heapUsuarios = new MaxHeapUsuarios(cantidadUsuarios);
-        bloqueActual = null; // no hay bloque aún
+        bloqueActual = null; 
     }
 
     public void agregarBloque(Transaccion[] transacciones) {
         bloqueActual = new MaxHeapTransacciones(transacciones); // nuevo bloque reemplaza el anterior
-
-        while (bloqueActual.tamaño() != 0) {
-            Transaccion t = bloqueActual.desencolar();
+        Transaccion[] lista = bloqueActual.devolverHeap();
+        for (int i = 0; i < lista.length; i++) {
+            Transaccion t = lista[i];
             int comprador = t.id_comprador();
             int vendedor = t.id_vendedor();
             int monto = t.monto();
@@ -32,7 +32,6 @@ public class Berretacoin {
 
     public Transaccion txMayorValorUltimoBloque(){
         return bloqueActual.transaccionMayorValor();
-
     }
 
     public Transaccion[] txUltimoBloque(){
@@ -43,6 +42,19 @@ public class Berretacoin {
         return heapUsuarios.usuarioMayorMonto();
 
     }
+
+    public int montoMedioUltimoBloque(){
+        return bloqueActual.montoPromedio();
+    }
+
+    public MaxHeapTransacciones bloqueActual(){
+        return bloqueActual;
+    }
+
+    public void hackearTx(){
+        bloqueActual.desencolar();
+    }
+
 
     // public int montoUsuario(int idUsuario) {
     //     return heapUsuarios.obtenerMonto(idUsuario);
@@ -109,3 +121,30 @@ public class Berretacoin {
 //         throw new UnsupportedOperationException("Implementar!");
 //     }
 // }
+
+
+
+
+//-----------------------------------------------------------------
+
+    // public void agregarBloque(Transaccion[] transacciones) {
+    //     bloqueActual = new MaxHeapTransacciones(transacciones); // nuevo bloque reemplaza el anterior
+
+    //     MaxHeapTransacciones bloqueActualCopia = new MaxHeapTransacciones(transacciones); 
+
+    //     while (bloqueActualCopia.tamaño() != 0) {
+    //         Transaccion t = bloqueActualCopia.desencolar();
+    //         int comprador = t.id_comprador();
+    //         int vendedor = t.id_vendedor();
+    //         int monto = t.monto();
+
+    //         if (comprador != 0) {
+    //             int montoAnterior = heapUsuarios.obtenerMonto(comprador);
+    //             heapUsuarios.actualizarMonto(comprador, montoAnterior - monto);
+    //         }
+
+    //         int montoAnteriorV = heapUsuarios.obtenerMonto(vendedor);
+    //         heapUsuarios.actualizarMonto(vendedor, montoAnteriorV + monto);
+    //     }
+    // }
+

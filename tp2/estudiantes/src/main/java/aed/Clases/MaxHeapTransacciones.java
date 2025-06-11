@@ -11,10 +11,18 @@ public class MaxHeapTransacciones {
 
     public MaxHeapTransacciones(Transaccion[] transacciones) {
         this.tamaño = transacciones.length;
-        this.heap = new Transaccion[tamaño];
-        this.transaccionesOriginal = transacciones;
+        Transaccion[] copiaTransacciones = new Transaccion[tamaño];
+        for(int i =0 ; i<tamaño ; i++){
+        copiaTransacciones[i] = transacciones[i] ;
+        if (transacciones[i].id_comprador() != 0){
+            montoTotalSinCreacion = montoTotalSinCreacion + transacciones[i].monto() ;
+            tamañoSinCreacion ++ ;
+        }
+        }
+        this.transaccionesOriginal = copiaTransacciones;
 
-        for (int i = 0; i < tamaño; i++) {
+        this.heap = new Transaccion[tamaño];
+        for (int i = 0; i < transacciones.length; i++) {
             heap[i] = transacciones[i];
         }
 
@@ -36,7 +44,9 @@ public class MaxHeapTransacciones {
 
     private void bajar(int i) {
         while (true) {
-            int izq = 2 * i + 1, der = 2 * i + 2, mayor = i;
+            int izq = 2 * i + 1;
+            int der = 2 * i + 2;
+            int mayor = i;
 
             if (izq < tamaño && heap[izq].compareTo(heap[mayor]) > 0) mayor = izq;
             if (der < tamaño && heap[der].compareTo(heap[mayor]) > 0) mayor = der;
@@ -55,8 +65,8 @@ public class MaxHeapTransacciones {
     }
 
     public Transaccion[] copia (){
-        Transaccion[] copiaTransacciones = new Transaccion[tamaño];
-        for(int i =0 ; i<tamaño-1 ; i++){
+        Transaccion[] copiaTransacciones = new Transaccion[transaccionesOriginal.length];
+        for(int i =0 ; i<transaccionesOriginal.length ; i++){
             copiaTransacciones[i] = transaccionesOriginal[i] ;
         }
         return copiaTransacciones;
@@ -64,5 +74,16 @@ public class MaxHeapTransacciones {
 
     public int tamaño(){
         return tamaño;
+    }
+
+    public int montoPromedio(){
+        if (tamañoSinCreacion == 0 ){
+            return 0;
+        }   
+        return montoTotalSinCreacion/tamañoSinCreacion ;
+    } 
+
+    public Transaccion[] devolverHeap(){
+        return heap;
     }
 }

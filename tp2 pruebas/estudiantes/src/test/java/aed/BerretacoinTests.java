@@ -137,14 +137,7 @@ public class BerretacoinTests {
             new Transaccion(2, 3, 4, 1) // 4 -> $1
         };
 
-        //      transacciones = new Transaccion[] {
-        //     new Transaccion(0, 0, 2, 1), // 2 -> $1
-        //     new Transaccion(1, 2, 3, 1), // 3 -> $1
-        //     new Transaccion(2, 3, 4, 1) // 4 -> $1
-        // };
-
         berretacoin.agregarBloque(transacciones);
-        // System.out.println(berretacoin.bloqueActual().heap());
         assertEquals(berretacoin.maximoTenedor(), 4);
         assertEquals(berretacoin.txMayorValorUltimoBloque(), new Transaccion(2, 3, 4, 1));
         assertEquals(berretacoin.montoMedioUltimoBloque(), 1);
@@ -257,18 +250,9 @@ public class BerretacoinTests {
             new Transaccion(1, 2, 3, 1), // 3 -> $1
         };
 
-        //      transacciones = new Transaccion[] {
-        //     new Transaccion(0, 0, 2, 1), // 2 -> $1
-        //     new Transaccion(1, 2, 3, 1), // 3 -> $1
-        //     new Transaccion(2, 3, 4, 1) // 4 -> $1
-        // };
-
         berretacoin.agregarBloque(transacciones);
         
-        berretacoin.hackearTx();  //saca la tercera transaccion
-        //      transacciones = new Transaccion[] {
-        //     new Transaccion(0, 0, 2, 1), // 2 -> $1
-        //     new Transaccion(1, 2, 3, 1), // 3 -> $1 }
+        berretacoin.hackearTx();
 
         assertEquals(berretacoin.maximoTenedor(), 3);
         assertEquals(berretacoin.txMayorValorUltimoBloque(), new Transaccion(1, 2, 3, 1));

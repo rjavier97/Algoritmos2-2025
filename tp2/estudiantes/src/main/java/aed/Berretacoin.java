@@ -52,7 +52,14 @@ public class Berretacoin {
     }
 
     public void hackearTx(){
+        Transaccion max = bloqueActual.transaccionMayorValor();
         bloqueActual.desencolar();
+        int comprador = max.id_comprador();
+        int vendedor = max.id_vendedor();
+        int monto = max.monto();
+        heapUsuarios.actualizarMonto(comprador, heapUsuarios.obtenerMonto(comprador) +monto);
+        heapUsuarios.actualizarMonto(vendedor, heapUsuarios.obtenerMonto(vendedor) -monto);
+
     }
 
 

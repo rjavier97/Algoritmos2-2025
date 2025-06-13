@@ -246,7 +246,7 @@ public class BerretacoinTests {
         Transaccion[] bloque = {new Transaccion(0, 0, 1, 1)};
         berretacoin.agregarBloque(bloque);
         berretacoin.hackearTx();        
-        Transaccion[] resultado = berretacoin.txUltimoBloque();
+        Transaccion[] resultado = berretacoin.txUltimoBloque(); //devolvemos una copia de la secuencia de transacciones
         assertEquals(0, resultado.length);
     }
 
@@ -262,7 +262,6 @@ public class BerretacoinTests {
         //     new Transaccion(1, 2, 3, 1), // 3 -> $1
         //     new Transaccion(2, 3, 4, 1) // 4 -> $1
         // };
-
         berretacoin.agregarBloque(transacciones);
         
         berretacoin.hackearTx();  //saca la tercera transaccion

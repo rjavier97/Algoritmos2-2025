@@ -1,6 +1,6 @@
 package aed.Clases;
 
-public class Usuario implements Comparable<Usuario> {
+public class Usuario implements Comparable<Usuario >{
     private int id;
     private int monto;
     private Handle handle;

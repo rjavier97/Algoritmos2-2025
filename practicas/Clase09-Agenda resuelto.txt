@@ -1,0 +1,97 @@
+dia, hora, IdActividad es Int
+tag es Str
+
+Módulo AgendaImpl implementa Agenda <
+
+	var Actividades: disccionarioLog< IdActividad: struct<Dia: dia, Inicio: hora, Fin: hora> >
+	var Tags: DiccionarioDigital< tag: conjLineal<IdActividad> >
+	var Dias: DiccionarioLog< dia: Array< conjLineal<IdActividad> > >
+
+	pred invRep(c': AgendaImpl){
+		Todas las claves de c'.Actividades están en los conjuntos de c'.Dias, en el día y los horarios correctos según la struct de c'.Actividades
+
+		Todos los IdActividad de todos los conjuntos de c'.Tags son claves de c'.Actividades
+
+        Todos los arreglos que son valores de c'.Dias tienen exactamente 24 posiciones
+   	}
+
+	function Crear(): AgendaImpl
+		// Creo todas las variables con sus tipos 
+
+		AgendaImpl res := new AgendaImpl
+
+		diccionarioLog< IdActividad: struct<Dia: dia, Inicio: hora, Fin: hora> > res.Actividades := new DiccionarioLog() 
+		DiccionarioLog< dia: Array< conjLineal<IdActividad> > > res.Dias := new DiccionarioLog()
+		DiccionarioDigital< tag: conjLineal<IdActividad > > res.Tags := new DiccionarioDigital()
+		
+		return res
+	end function
+
+	function RegistrarActividad(inout ag: AgendaImpl, in act: IdActividad, in Dia: dia, in Inicio: hora, in Fin: hora)
+
+		// Agrego la actividad, que por requiere no está registrada previamente
+		ag.Actividades.definir(act, new struct<Dia: Dia, Inicio: Inicio, Fin: Fin>)
+		
+		// Ahora tengo que agregarla a los días
+		// Como sé que no está registrada, puedo agregarRapido en O(1)
+		// Pero si el día no está registrado hay que registrarlo
+		if ! ag.Dias.esta(Dia)
+			Array<conjuntoLineal> horarios := new Array[24]
+
+			hora i := Inicio
+			while (i < Fin)
+				horarios[i].agregarRapido(act)
+				i++
+			endwhile
+
+			ag.Dias.definir(Dia, horarios)
+
+		else 
+			hora i := Inicio
+			while (i < Fin)
+				ag.Dias.obtener(Dia)[i].agregarRapido(act)
+				i++
+			endwhile
+
+		endif
+
+	end function
+
+	function VerActividad(in ag: AgendaImpl, in act: IdActividad): struct < Dia: dia, inicio: hora, fin: hora >
+		// Solo tengo que obtener la actividad del DiccionarioLog y devolverla
+
+		return ag.Actividades.obtener(act)
+	end function
+
+	function AgregarTag(inout ag: AgendaImpl, in act: IdActividad, in t: tag)
+		// Por requiere sabemos que la actividad está registrada y que no tiene este Tag
+
+		if ! ag.Tags.esta(t)
+			ConjuntoLineal<IdActividad> actividades := new ConjuntoLineal()
+			actividades.agregarRapido(act)
+			ag.Tags.definir(t, actividades)
+		else
+			ag.Tags.obtener(t).agregarRapido(act)
+		endif
+
+	end function
+
+	function horaMasOcupada(in ag: AgendaImpl, in d: dia): hora
+		h := 0
+		max = 0
+		res = 0
+		while h < 24
+			actividades_h := ag.Dias.obtener(d)[h] // Obtener el día en el DiccionarioLog es O(log(n))
+			if actividades_h.length > max
+				max := actividades_h
+				res := h
+			endif
+		return res
+	end function
+
+	function ActividadesPorTag(in ag: AgendaImpl, in t: tag): Conjunto<IdActividad>
+		res := ag.Tags.obtener(t)
+		return res
+	end function
+
+>

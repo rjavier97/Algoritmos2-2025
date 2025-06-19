@@ -35,7 +35,7 @@ public class MaxHeapUsuarios {
     }
 
     public int obtenerMonto(int idUsuario) {
-        return heap[handles[idUsuario - 1].posicion].monto();
+        return heap[handles[idUsuario-1].posicion].monto();
     }
 
     private void subir(int i) {
